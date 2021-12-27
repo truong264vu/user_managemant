@@ -1,0 +1,1 @@
+<p>Click the link to confirm : </p><p>{{route('auth.email_confirm')}}</p>

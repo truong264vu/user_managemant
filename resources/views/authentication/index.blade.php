@@ -11,16 +11,16 @@
 
 <ul class="nav nav-tabs d-flex justify-content-center  " id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Login</button>
+      <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-page" type="button" role="tab" aria-controls="home" aria-selected="true">Login</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link " id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Register</button>
+      <button class="nav-link " id="register-tab" data-bs-toggle="tab" data-bs-target="#register-page" type="button" role="tab" aria-controls="profile" aria-selected="false">Register</button>
     </li>
 </ul>
 
 <div class="tab-content mt-5" id="myTabContent">
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">@include('authentication.login')</div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">@include('authentication.register')</div>
+    <div class="tab-pane fade show active" id="login-page" role="tabpanel" aria-labelledby="home-tab">@include('authentication.login')</div>
+    <div class="tab-pane fade" id="register-page" role="tabpanel" aria-labelledby="profile-tab">@include('authentication.register')</div>
 </div>
 
 </body>
@@ -29,30 +29,15 @@
 
 @include('layout.script')
 <script>
+  $(document).ready(function(){
+      if($('#error').html()) {
+         $('#login-tab').removeClass('active');
+          $('#login-page').removeClass('show');
+          $('#login-page').removeClass('active');
 
-        $(document).on('click', '#register', function (e) {
-            e.preventDefault();
-
-            let token = $('input[name=_token]').val();
-            let emailRegitser = $('input[name=email-regitser]').val();
-            let passwordRegister = $('input[name=password-register]').val();
-            let confirmPassword = $('input[name=confirm-password]').val();
-
-            let formData = new FormData();
-            formData.append('emailRegitser', emailRegitser);
-            formData.append('passwordRegister', passwordRegister);
-            formData.append('confirmPassword', confirmPassword);
-
-            const registerUrl = `{{ route('auth.register') }}`;
-            fetch(registerUrl, {
-                method: "POST",
-                headers: {
-                    "X-CSRF-Token": $('meta[name="csrf-token"]').attr('content')
-                },
-                body: formData,
-            }).then(async (response) => {
-                const result = await response.json();
-                console.log(result)
-            })
-        });
+          $('#register-tab').addClass('active');
+          $('#register-page').addClass('show');
+          $('#register-page').addClass('active');
+      }
+  });
 </script>

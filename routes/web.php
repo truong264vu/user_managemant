@@ -14,13 +14,17 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/home', function () {
+    return view('home.index');
+})->name('home');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::name('auth.')->prefix('auth')->group(function () {
 
         Route::get('/authentication', [AuthController::class, 'Authentication'])->name('authentication');
-        Route::post('/login', [AuthController::class, 'Login'])->name('login');
+        Route::post('/login', [AuthController::class, 'Login'])->name('HandleLogin');
+        Route::get('/login', [AuthController::class, 'index'])->name('login');
         Route::post('/register', [AuthController::class, 'Register'])->name('register');
+        Route::get('email_confirm',[AuthController::class, 'emailConfirm'])->name('email_confirm');
 
 });
