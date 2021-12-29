@@ -30,7 +30,7 @@ class AuthController extends Controller
             if(Auth::attempt([
                 'email' => $request->email_login,
                 'password' => $request->password_login,
-                'is_confirm' => 2 
+                // 'is_confirm' => 2 
             ])){
                 return redirect()->route('home');
             }
@@ -62,11 +62,10 @@ class AuthController extends Controller
 
     public function emailConfirm()
     {
-        $id = auth()->user()->id;
-        $user = User::where('id',$id )->first();
-        $user->is_confirm = 2;
-        $user->save();
-
+        // $id = auth()->user()->id;
+        // $user = User::where('id', $id )->first();
+        // $user->is_confirm = 2;
+        // $user->save();
         return redirect()->route('home');
     }
 

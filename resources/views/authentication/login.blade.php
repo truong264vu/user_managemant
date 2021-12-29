@@ -10,7 +10,7 @@
             @endif
             <div class="form-group text-white">
                 <label for="email-login">Email address</label>
-                <input type="email" class="form-control" name="email_login" id="email-login" placeholder="Enter email">
+                <input type="email" class="form-control" value="{{old('email_login')}}" name="email_login" id="email-login" placeholder="Enter email">
             </div>
             <div class="form-group text-white">
                 <label for="password-login">Password</label>

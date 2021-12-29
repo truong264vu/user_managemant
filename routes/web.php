@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +28,12 @@ Route::name('auth.')->prefix('auth')->group(function () {
         Route::get('/login', [AuthController::class, 'index'])->name('login');
         Route::post('/register', [AuthController::class, 'Register'])->name('register');
         Route::get('email_confirm',[AuthController::class, 'emailConfirm'])->name('email_confirm');
+
+});
+
+
+Route::name('user.')->prefix('user')->group(function () {
+    Route::post('/update-avatar', [UserController::class, 'UpdateAvt'])->name('update_avatar');
+    Route::get('/image', [UserController::class, 'Image'])->name('image');
 
 });
